@@ -1,0 +1,18 @@
+<h1>Listing all articles</h1>
+<%= link_to "Create new video" , new_video_path %>
+<table>
+    <tr>
+        <th>title</th>
+        <th>Description</th>
+        <% @videos.each do |v| %>
+        <tr>
+            <td><%= v.title %></td>
+            <td><%= v.description %></td>
+            <td><%= v.description %></td>
+            <td><%= link_to "Edit" , edit_video_path(v.id) %></td>
+            <td><%= link_to "Show" , video_path(v.id) %></td>
+        </tr>
+        <% end %>
+    
+    </tr>
+</table>

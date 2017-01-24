@@ -18,6 +18,24 @@ class VideosController < ApplicationController
         @video = Video.find(params[:id])
     end
     
+    def edit 
+        @video = Video.find(params[:id])
+    end
+    
+    def update 
+        @video = Video.new(video_params)
+        if @video.update(video_params)
+            flash[:notice] = "Video was sucessfully updated"
+            redirect_to video_path(@video)
+        else 
+            render 'edit'
+        end 
+    end 
+    
+    def index 
+        @videos = Video.all
+    end
+    
     private 
       def video_params
           params.require(:video).permit(:title, :description)
