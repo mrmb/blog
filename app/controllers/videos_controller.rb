@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+    before_action :set_video , only: [:edit,:update,:show,:destroy]
     def new 
         @video = Video.new
     end 
@@ -15,11 +16,11 @@ class VideosController < ApplicationController
     end
     
     def show 
-        @video = Video.find(params[:id])
+        @video = set_video
     end
     
     def edit 
-        @video = Video.find(params[:id])
+        @video = set_video
     end
     
     def update 
@@ -36,7 +37,15 @@ class VideosController < ApplicationController
         @videos = Video.all
     end
     
+    def destroy
+      @video = set_video
+      @video.destroy
+      redirect_to videos_path
+    end 
     private 
+      def set_video 
+          @video = Video.find(params[:id])
+      end 
       def video_params
           params.require(:video).permit(:title, :description)
       end
